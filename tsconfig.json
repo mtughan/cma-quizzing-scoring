@@ -1,0 +1,9 @@
+{
+  "extends": "./src/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+  },
+  "references": [
+    { "path": "src/model" }
+  ]
+}
