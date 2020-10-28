@@ -1,31 +1,40 @@
+import QuizzerScoreOverview from './QuizzerScoreOverview';
+
 class Quizzer {
-  #results: boolean[] = [];
+  #results: Map<number, boolean> = new Map<number, boolean>();
 
   constructor(public readonly name: string) {}
 
-  addQuestionResult(correct: boolean): void {
-    this.#results.push(correct);
+  addQuestionResult(question: number, correct: boolean): void {
+    this.#results.set(question, correct);
   }
 
-  getScore(): number {
-    let correct = 0;
-    let incorrect = 0;
-    this.#results.forEach((result) => {
-      if (result) {
-        correct += 1;
-      } else {
-        incorrect += 1;
-      }
-    });
+  getScore(atQuestion: number): QuizzerScoreOverview {
+    const overview: QuizzerScoreOverview = atQuestion <= 1 ? {
+      correct: 0,
+      incorrect: 0,
+      score: 0,
+    } : this.getScore(atQuestion - 1);
 
-    let score = correct * 20;
-    if (correct >= 4 && incorrect === 0) {
-      score += 10;
-    } else if (incorrect > 1) {
-      // penalize for more than one error
-      score -= (incorrect - 1) * 10;
+    if (this.#results.has(atQuestion)) {
+      const result = this.#results.get(atQuestion);
+      if (result) {
+        overview.correct += 1;
+        overview.score += 20;
+
+        if (overview.correct >= 4 && overview.incorrect === 0) {
+          overview.score += 10;
+        }
+      } else {
+        overview.incorrect += 1;
+
+        if (overview.incorrect > 1) {
+          overview.score -= 10;
+        }
+      }
     }
-    return score;
+
+    return overview;
   }
 }
 
