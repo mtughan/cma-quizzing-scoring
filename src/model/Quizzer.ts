@@ -28,7 +28,9 @@ class Quizzer {
       } else {
         overview.incorrect += 1;
 
-        if (overview.incorrect > 1) {
+        if (atQuestion >= 17 || overview.incorrect > 1) {
+          // points are deducted if error points are in effect (question 17 and later)
+          // or if the quizzer has made multiple errors
           overview.score -= 10;
         }
       }
