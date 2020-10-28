@@ -1,4 +1,7 @@
+import QuestionNumberUtils from './QuestionNumberUtils';
 import QuizzerScoreOverview from './QuizzerScoreOverview';
+
+const q17Index = QuestionNumberUtils.getQuestionIndexForQuestionStr('17');
 
 class Quizzer {
   #results: Map<number, boolean> = new Map<number, boolean>();
@@ -28,7 +31,7 @@ class Quizzer {
       } else {
         overview.incorrect += 1;
 
-        if (atQuestion >= 17 || overview.incorrect > 1) {
+        if (atQuestion >= q17Index || overview.incorrect > 1) {
           // points are deducted if error points are in effect (question 17 and later)
           // or if the quizzer has made multiple errors
           overview.score -= 10;
