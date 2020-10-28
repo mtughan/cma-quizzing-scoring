@@ -75,3 +75,71 @@ test('quizzer with 4 questions answered correctly and 1 incorrectly has score 80
   quizzer.addQuestionResult(true);
   expect(quizzer.getScore()).toBe(80);
 });
+
+test('quizzer with 1 question answered correctly and 2 incorrectly has score 10', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  expect(quizzer.getScore()).toBe(10);
+});
+
+test('quizzer with 2 questions answered correctly and 2 incorrectly has score 30', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  expect(quizzer.getScore()).toBe(30);
+});
+
+test('quizzer with 3 questions answered correctly and 2 incorrectly has score 50', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  expect(quizzer.getScore()).toBe(50);
+});
+
+test('quizzer with 4 questions answered correctly and 2 incorrectly has score 70', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(true);
+  expect(quizzer.getScore()).toBe(70);
+});
+
+test('quizzer with 1 question answered correctly and 3 incorrectly has score 0', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(false);
+  expect(quizzer.getScore()).toBe(0);
+});
+
+test('quizzer with 2 questions answered correctly and 3 incorrectly has score 20', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  expect(quizzer.getScore()).toBe(20);
+});
+
+test('quizzer with 3 questions answered correctly and 3 incorrectly has score 40', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  quizzer.addQuestionResult(true);
+  quizzer.addQuestionResult(false);
+  expect(quizzer.getScore()).toBe(40);
+});

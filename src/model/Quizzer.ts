@@ -18,11 +18,14 @@ class Quizzer {
       }
     });
 
-    let bonus = 0;
+    let score = correct * 20;
     if (correct >= 4 && incorrect === 0) {
-      bonus = 10;
+      score += 10;
+    } else if (incorrect > 1) {
+      // penalize for more than one error
+      score -= (incorrect - 1) * 10;
     }
-    return correct * 20 + bonus;
+    return score;
   }
 }
 
