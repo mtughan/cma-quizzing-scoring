@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "author": "Michael Tughan <mtughan@gmail.com>",
+  "repository": "github:mtughan/cma-quizzing-scoring",
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
     "@types/jest": "^26.0.15",
