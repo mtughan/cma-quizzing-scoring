@@ -29,6 +29,8 @@ class Quizzer {
         if (overview.correct >= 4 && overview.incorrect === 0) {
           overview.score += 10;
         }
+      } else if (result === QuestionResult.BONUS_CORRECT_ANSWER) {
+        overview.score += atQuestion >= q17Index ? 10 : 20;
       } else { // result === QuestionResult.ERROR
         overview.incorrect += 1;
 

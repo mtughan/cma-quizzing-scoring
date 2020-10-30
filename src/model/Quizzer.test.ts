@@ -246,3 +246,18 @@ test('quizzer with 1 question answered correctly and 2 incorrectly (1 with error
   expect(quizzer.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('19')).score).toBe(10);
   expect(quizzer.getScore(q20BIndex).score).toBe(10);
 });
+
+test('quizzer who answers 1 bonus question correctly before Q17 has score 20', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(3, QuestionResult.BONUS_CORRECT_ANSWER);
+  expect(quizzer.getScore(2).score).toBe(0);
+  expect(quizzer.getScore(3).score).toBe(20);
+  expect(quizzer.getScore(q20BIndex).score).toBe(20);
+});
+
+test('quizzer who answers 1 bonus question correctly after Q17 has score 10', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B'), QuestionResult.BONUS_CORRECT_ANSWER);
+  expect(quizzer.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B')).score).toBe(10);
+  expect(quizzer.getScore(q20BIndex).score).toBe(10);
+});
