@@ -1,6 +1,7 @@
 interface QuizzerScoreOverview {
   correct: number;
   incorrect: number;
+  fouls: number;
   score: number;
 }
 

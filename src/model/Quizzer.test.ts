@@ -271,3 +271,16 @@ test('quizzer who answers only bonus questions incorrectly has score 0', () => {
   expect(quizzer.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B')).score).toBe(0);
   expect(quizzer.getScore(q20BIndex).score).toBe(0);
 });
+
+test('quizzer who fouls 3 times loses 10 points', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(1, QuestionResult.FOUL);
+  quizzer.addQuestionResult(2, QuestionResult.CORRECT_ANSWER);
+  quizzer.addQuestionResult(3, QuestionResult.FOUL);
+  quizzer.addQuestionResult(4, QuestionResult.FOUL);
+  expect(quizzer.getScore(1).score).toBe(0);
+  expect(quizzer.getScore(2).score).toBe(20);
+  expect(quizzer.getScore(3).score).toBe(20);
+  expect(quizzer.getScore(4).score).toBe(10);
+  expect(quizzer.getScore(q20BIndex).score).toBe(10);
+});

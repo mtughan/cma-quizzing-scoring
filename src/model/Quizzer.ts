@@ -17,6 +17,7 @@ class Quizzer {
     const overview: QuizzerScoreOverview = atQuestion <= 1 ? {
       correct: 0,
       incorrect: 0,
+      fouls: 0,
       score: 0,
     } : this.getScore(atQuestion - 1);
 
@@ -37,6 +38,12 @@ class Quizzer {
         if (atQuestion >= q17Index || overview.incorrect > 1) {
           // points are deducted if error points are in effect (question 17 and later)
           // or if the quizzer has made multiple errors
+          overview.score -= 10;
+        }
+      } else if (result === QuestionResult.FOUL) {
+        overview.fouls += 1;
+
+        if (overview.fouls >= 3) {
           overview.score -= 10;
         }
       }

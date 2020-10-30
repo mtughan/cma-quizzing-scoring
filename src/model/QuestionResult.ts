@@ -3,6 +3,7 @@ enum QuestionResult {
   ERROR,
   BONUS_CORRECT_ANSWER,
   BONUS_ERROR,
+  FOUL,
 }
 
 export default QuestionResult;
