@@ -261,3 +261,13 @@ test('quizzer who answers 1 bonus question correctly after Q17 has score 10', ()
   expect(quizzer.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B')).score).toBe(10);
   expect(quizzer.getScore(q20BIndex).score).toBe(10);
 });
+
+test('quizzer who answers only bonus questions incorrectly has score 0', () => {
+  const quizzer = new Quizzer(name);
+  quizzer.addQuestionResult(3, QuestionResult.BONUS_ERROR);
+  quizzer.addQuestionResult(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B'), QuestionResult.BONUS_ERROR);
+  expect(quizzer.getScore(2).score).toBe(0);
+  expect(quizzer.getScore(3).score).toBe(0);
+  expect(quizzer.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B')).score).toBe(0);
+  expect(quizzer.getScore(q20BIndex).score).toBe(0);
+});

@@ -31,7 +31,7 @@ class Quizzer {
         }
       } else if (result === QuestionResult.BONUS_CORRECT_ANSWER) {
         overview.score += atQuestion >= q17Index ? 10 : 20;
-      } else { // result === QuestionResult.ERROR
+      } else if (result === QuestionResult.ERROR) {
         overview.incorrect += 1;
 
         if (atQuestion >= q17Index || overview.incorrect > 1) {
