@@ -1,15 +1,16 @@
 import QuestionNumberUtils from './QuestionNumberUtils';
+import QuestionResult from './QuestionResult';
 import QuizzerScoreOverview from './QuizzerScoreOverview';
 
 const q17Index = QuestionNumberUtils.getQuestionIndexForQuestionStr('17');
 
 class Quizzer {
-  #results: Map<number, boolean> = new Map<number, boolean>();
+  #results: Map<number, QuestionResult> = new Map<number, QuestionResult>();
 
   constructor(public readonly name: string) {}
 
-  addQuestionResult(question: number, correct: boolean): void {
-    this.#results.set(question, correct);
+  addQuestionResult(question: number, result: QuestionResult): void {
+    this.#results.set(question, result);
   }
 
   getScore(atQuestion: number): QuizzerScoreOverview {
@@ -21,14 +22,14 @@ class Quizzer {
 
     if (this.#results.has(atQuestion)) {
       const result = this.#results.get(atQuestion);
-      if (result) {
+      if (result === QuestionResult.CORRECT_ANSWER) {
         overview.correct += 1;
         overview.score += 20;
 
         if (overview.correct >= 4 && overview.incorrect === 0) {
           overview.score += 10;
         }
-      } else {
+      } else { // result === QuestionResult.ERROR
         overview.incorrect += 1;
 
         if (atQuestion >= q17Index || overview.incorrect > 1) {
