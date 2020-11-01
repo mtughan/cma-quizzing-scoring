@@ -34,10 +34,15 @@ class Team {
     } : this.getScore(atQuestion - 1);
 
     const quizzerScores = this.getQuizzers().map((quizzer) => quizzer?.getScore(atQuestion));
+    const totalIncorrect = quizzerScores
+      .map((score) => score?.incorrect ?? 0)
+      .reduce((prev, cur) => prev + cur);
+
     quizzerScores.forEach((score) => {
       if (score?.lastQuestionResult === QuestionResult.CORRECT_ANSWER) {
         overview.score += 20;
-      } else if (score?.lastQuestionResult === QuestionResult.ERROR && score.incorrect > 1) {
+      } else if (score?.lastQuestionResult === QuestionResult.ERROR
+          && (score.incorrect > 1 || totalIncorrect >= 3)) {
         overview.score -= 10;
       }
     });
