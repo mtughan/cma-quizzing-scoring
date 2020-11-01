@@ -33,10 +33,12 @@ class Team {
       score: this.#onTime ? 20 : 0,
     } : this.getScore(atQuestion - 1);
 
-    const results = this.getQuizzers().map((quizzer) => quizzer?.getQuestionResult(atQuestion));
-    results.forEach((result) => {
-      if (result === QuestionResult.CORRECT_ANSWER) {
+    const quizzerScores = this.getQuizzers().map((quizzer) => quizzer?.getScore(atQuestion));
+    quizzerScores.forEach((score) => {
+      if (score?.lastQuestionResult === QuestionResult.CORRECT_ANSWER) {
         overview.score += 20;
+      } else if (score?.lastQuestionResult === QuestionResult.ERROR && score.incorrect > 1) {
+        overview.score -= 10;
       }
     });
 

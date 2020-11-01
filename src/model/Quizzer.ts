@@ -13,10 +13,6 @@ class Quizzer {
     this.#results.set(question, result);
   }
 
-  getQuestionResult(question: number): QuestionResult | null {
-    return this.#results.get(question) ?? null;
-  }
-
   getScore(atQuestion: number): QuizzerScoreOverview {
     const overview: QuizzerScoreOverview = atQuestion <= 1 ? {
       correct: 0,
@@ -27,6 +23,7 @@ class Quizzer {
 
     if (this.#results.has(atQuestion)) {
       const result = this.#results.get(atQuestion);
+      overview.lastQuestionResult = result;
       if (result === QuestionResult.CORRECT_ANSWER && atQuestion < overtimeIndex) {
         overview.correct += 1;
         overview.score += 20;
@@ -47,6 +44,8 @@ class Quizzer {
           overview.score -= 10;
         }
       }
+    } else {
+      overview.lastQuestionResult = undefined;
     }
 
     return overview;
