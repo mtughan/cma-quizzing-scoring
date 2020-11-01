@@ -1,8 +1,17 @@
 import Quizzer from './Quizzer';
 import Team from './Team';
 
-test('score with no questions answered is 20', () => {
+test('team that is not on time has score 0 to start', () => {
   const team = new Team();
+  team.setOnTime(false);
+
+  expect(team.getScore()).toBe(0);
+});
+
+test('team that is on time has score 20 to start', () => {
+  const team = new Team();
+  team.setOnTime(true);
+
   expect(team.getScore()).toBe(20);
 });
 

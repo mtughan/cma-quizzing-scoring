@@ -3,12 +3,12 @@ import Quizzer from './Quizzer';
 class Team {
   private static readonly MAX_QUIZZERS = 5;
 
-  #score: number;
+  #onTime = false;
 
   #quizzers: Map<number, Quizzer> = new Map<number, Quizzer>();
 
-  constructor() {
-    this.#score = 20;
+  setOnTime(onTime: boolean): void {
+    this.#onTime = onTime;
   }
 
   setQuizzer(index: number, quizzer: Quizzer): void {
@@ -27,7 +27,13 @@ class Team {
   }
 
   getScore(): number {
-    return this.#score;
+    let score = 0;
+
+    if (this.#onTime) {
+      score += 20;
+    }
+
+    return score;
   }
 }
 
