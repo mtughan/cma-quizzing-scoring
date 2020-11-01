@@ -1,6 +1,9 @@
+import QuestionNumberUtils from './QuestionNumberUtils';
 import QuestionResult from './QuestionResult';
 import Quizzer from './Quizzer';
 import TeamScoreOverview from './TeamScoreOverview';
+
+const q17Index = QuestionNumberUtils.getQuestionIndexForQuestionStr('17');
 
 class Team {
   private static readonly MAX_QUIZZERS = 5;
@@ -41,6 +44,8 @@ class Team {
     quizzerScores.forEach((score) => {
       if (score?.lastQuestionResult === QuestionResult.CORRECT_ANSWER) {
         overview.score += 20;
+      } else if (score?.lastQuestionResult === QuestionResult.BONUS_CORRECT_ANSWER) {
+        overview.score += atQuestion >= q17Index ? 10 : 20;
       } else if (score?.lastQuestionResult === QuestionResult.ERROR
           && (score.incorrect > 1 || totalIncorrect >= 3)) {
         overview.score -= 10;

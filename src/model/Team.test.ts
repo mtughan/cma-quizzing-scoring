@@ -236,3 +236,43 @@ test('team that is on time and has 3 correct answers from a quizzer and 3 incorr
   expect(team.getScore(6).score).toBe(70);
   expect(team.getScore(q20BIndex).score).toBe(70);
 });
+
+test('team that is on time and has 1 correct bonus answer before question 17 has score 40', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(3, QuestionResult.BONUS_CORRECT_ANSWER);
+
+  expect(team.getScore(3).score).toBe(40);
+  expect(team.getScore(q20BIndex).score).toBe(40);
+});
+
+test('team that is on time and has 1 correct bonus answer after question 17 has score 30', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B'), QuestionResult.BONUS_CORRECT_ANSWER);
+
+  expect(team.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B')).score).toBe(30);
+  expect(team.getScore(q20BIndex).score).toBe(30);
+});
+
+test('team that is on time and has 3 incorrect bonus answers before question 17 has score 20', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(3, QuestionResult.BONUS_ERROR);
+  team.getQuizzers()[0]?.addQuestionResult(6, QuestionResult.BONUS_ERROR);
+  team.getQuizzers()[0]?.addQuestionResult(9, QuestionResult.BONUS_ERROR);
+
+  expect(team.getScore(3).score).toBe(20);
+  expect(team.getScore(6).score).toBe(20);
+  expect(team.getScore(9).score).toBe(20);
+  expect(team.getScore(q20BIndex).score).toBe(20);
+});
+
+test('team that is on time and has 3 incorrect bonus answers after question 17 has score 20', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B'), QuestionResult.BONUS_ERROR);
+  team.getQuizzers()[0]?.addQuestionResult(QuestionNumberUtils.getQuestionIndexForQuestionStr('18B'), QuestionResult.BONUS_ERROR);
+  team.getQuizzers()[0]?.addQuestionResult(QuestionNumberUtils.getQuestionIndexForQuestionStr('19B'), QuestionResult.BONUS_ERROR);
+
+  expect(team.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('17B')).score).toBe(20);
+  expect(team.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('18B')).score).toBe(20);
+  expect(team.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('19B')).score).toBe(20);
+  expect(team.getScore(q20BIndex).score).toBe(20);
+});
