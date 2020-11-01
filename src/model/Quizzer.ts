@@ -13,6 +13,10 @@ class Quizzer {
     this.#results.set(question, result);
   }
 
+  getQuestionResult(question: number): QuestionResult | null {
+    return this.#results.get(question) ?? null;
+  }
+
   getScore(atQuestion: number): QuizzerScoreOverview {
     const overview: QuizzerScoreOverview = atQuestion <= 1 ? {
       correct: 0,

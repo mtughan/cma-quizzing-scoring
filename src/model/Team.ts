@@ -1,3 +1,4 @@
+import QuestionResult from './QuestionResult';
 import Quizzer from './Quizzer';
 import TeamScoreOverview from './TeamScoreOverview';
 
@@ -31,6 +32,13 @@ class Team {
     const overview: TeamScoreOverview = atQuestion <= 1 ? {
       score: this.#onTime ? 20 : 0,
     } : this.getScore(atQuestion - 1);
+
+    const results = this.getQuizzers().map((quizzer) => quizzer?.getQuestionResult(atQuestion));
+    results.forEach((result) => {
+      if (result === QuestionResult.CORRECT_ANSWER) {
+        overview.score += 20;
+      }
+    });
 
     return overview;
   }
