@@ -1,18 +1,21 @@
+import QuestionNumberUtils from './QuestionNumberUtils';
 import Quizzer from './Quizzer';
 import Team from './Team';
+
+const q20BIndex = QuestionNumberUtils.getQuestionIndexForQuestionStr('20B');
 
 test('team that is not on time has score 0 to start', () => {
   const team = new Team();
   team.setOnTime(false);
 
-  expect(team.getScore()).toBe(0);
+  expect(team.getScore(q20BIndex).score).toBe(0);
 });
 
 test('team that is on time has score 20 to start', () => {
   const team = new Team();
   team.setOnTime(true);
 
-  expect(team.getScore()).toBe(20);
+  expect(team.getScore(q20BIndex).score).toBe(20);
 });
 
 test('quizzers can be added to a team', () => {

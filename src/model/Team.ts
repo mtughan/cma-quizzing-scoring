@@ -1,4 +1,5 @@
 import Quizzer from './Quizzer';
+import TeamScoreOverview from './TeamScoreOverview';
 
 class Team {
   private static readonly MAX_QUIZZERS = 5;
@@ -26,14 +27,12 @@ class Team {
     return quizzers;
   }
 
-  getScore(): number {
-    let score = 0;
+  getScore(atQuestion: number): TeamScoreOverview {
+    const overview: TeamScoreOverview = atQuestion <= 1 ? {
+      score: this.#onTime ? 20 : 0,
+    } : this.getScore(atQuestion - 1);
 
-    if (this.#onTime) {
-      score += 20;
-    }
-
-    return score;
+    return overview;
   }
 }
 
