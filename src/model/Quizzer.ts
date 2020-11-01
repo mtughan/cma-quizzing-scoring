@@ -2,7 +2,7 @@ import QuestionNumberUtils from './QuestionNumberUtils';
 import QuestionResult from './QuestionResult';
 import QuizzerScoreOverview from './QuizzerScoreOverview';
 
-const q17Index = QuestionNumberUtils.getQuestionIndexForQuestionStr('17');
+const overtimeIndex = QuestionNumberUtils.getQuestionIndexForQuestionStr('21');
 
 class Quizzer {
   #results: Map<number, QuestionResult> = new Map<number, QuestionResult>();
@@ -23,21 +23,17 @@ class Quizzer {
 
     if (this.#results.has(atQuestion)) {
       const result = this.#results.get(atQuestion);
-      if (result === QuestionResult.CORRECT_ANSWER) {
+      if (result === QuestionResult.CORRECT_ANSWER && atQuestion < overtimeIndex) {
         overview.correct += 1;
         overview.score += 20;
 
         if (overview.correct >= 4 && overview.incorrect === 0) {
           overview.score += 10;
         }
-      } else if (result === QuestionResult.BONUS_CORRECT_ANSWER) {
-        overview.score += atQuestion >= q17Index ? 10 : 20;
-      } else if (result === QuestionResult.ERROR) {
+      } else if (result === QuestionResult.ERROR && atQuestion < overtimeIndex) {
         overview.incorrect += 1;
 
-        if (atQuestion >= q17Index || overview.incorrect > 1) {
-          // points are deducted if error points are in effect (question 17 and later)
-          // or if the quizzer has made multiple errors
+        if (overview.incorrect > 1) {
           overview.score -= 10;
         }
       } else if (result === QuestionResult.FOUL) {
