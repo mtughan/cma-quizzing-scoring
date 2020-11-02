@@ -332,3 +332,45 @@ test('team that is on time and has 2 correct answers from 2 quizzers and 1 incor
   expect(team.getScore(4).score).toBe(60);
   expect(team.getScore(q20BIndex).score).toBe(60);
 });
+
+test('team that is on time and has a quizzer foul thrice has score 10', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(1, QuestionResult.FOUL);
+  team.getQuizzers()[0]?.addQuestionResult(2, QuestionResult.FOUL);
+  team.getQuizzers()[0]?.addQuestionResult(3, QuestionResult.FOUL);
+
+  expect(team.getScore(1).score).toBe(20);
+  expect(team.getScore(2).score).toBe(20);
+  expect(team.getScore(3).score).toBe(10);
+  expect(team.getScore(q20BIndex).score).toBe(10);
+});
+
+test('team that is on time and has 2 quizzers foul twice has score 10', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(1, QuestionResult.FOUL);
+  team.getQuizzers()[1]?.addQuestionResult(2, QuestionResult.FOUL);
+  team.getQuizzers()[0]?.addQuestionResult(3, QuestionResult.FOUL);
+  team.getQuizzers()[1]?.addQuestionResult(4, QuestionResult.FOUL);
+
+  expect(team.getScore(1).score).toBe(20);
+  expect(team.getScore(2).score).toBe(20);
+  expect(team.getScore(3).score).toBe(20);
+  expect(team.getScore(4).score).toBe(10);
+  expect(team.getScore(q20BIndex).score).toBe(10);
+});
+
+test('team that is on time and has 1 quizzer foul thrice and 1 quizzer foul once has score 10', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(1, QuestionResult.FOUL);
+  team.getQuizzers()[1]?.addQuestionResult(2, QuestionResult.FOUL);
+  team.getQuizzers()[0]?.addQuestionResult(3, QuestionResult.FOUL);
+  // this foul is both the team's 4th foul and the quizzer's 3rd individual foul
+  // however, it only counts for a 10-point deduction
+  team.getQuizzers()[0]?.addQuestionResult(4, QuestionResult.FOUL);
+
+  expect(team.getScore(1).score).toBe(20);
+  expect(team.getScore(2).score).toBe(20);
+  expect(team.getScore(3).score).toBe(20);
+  expect(team.getScore(4).score).toBe(10);
+  expect(team.getScore(q20BIndex).score).toBe(10);
+});

@@ -40,6 +40,9 @@ class Team {
     const totalIncorrect = quizzerScores
       .map((score) => score?.incorrect ?? 0)
       .reduce((prev, cur) => prev + cur);
+    const totalFouls = quizzerScores
+      .map((score) => score?.fouls ?? 0)
+      .reduce((prev, cur) => prev + cur);
     const totalQuizzersWithCorrectAnswers = quizzerScores
       .map((score) => score && score.correct > 0)
       .filter((hasCorrect) => hasCorrect)
@@ -58,6 +61,9 @@ class Team {
         overview.score += atQuestion >= q17Index ? 10 : 20;
       } else if (score?.lastQuestionResult === QuestionResult.ERROR
           && (score.incorrect > 1 || totalIncorrect >= 3)) {
+        overview.score -= 10;
+      } else if (score?.lastQuestionResult === QuestionResult.FOUL
+          && (score.fouls >= 3 || totalFouls >= 4)) {
         overview.score -= 10;
       }
     });
