@@ -1,3 +1,4 @@
+import ChallengeResult from './ChallengeResult';
 import QuestionNumberUtils from './QuestionNumberUtils';
 import QuestionResult from './QuestionResult';
 import Quizzer from './Quizzer';
@@ -373,4 +374,26 @@ test('team that is on time and has 1 quizzer foul thrice and 1 quizzer foul once
   expect(team.getScore(3).score).toBe(20);
   expect(team.getScore(4).score).toBe(10);
   expect(team.getScore(q20BIndex).score).toBe(10);
+});
+
+test('team that is on time and has 2 challenges accepted has score 20', () => {
+  const team = getFullTeam();
+  team.setChallengeResult(1, ChallengeResult.ACCEPTED);
+  team.setChallengeResult(2, ChallengeResult.ACCEPTED);
+
+  expect(team.getScore(1).score).toBe(20);
+  expect(team.getScore(2).score).toBe(20);
+  expect(team.getScore(q20BIndex).score).toBe(20);
+});
+
+test('team that is on time and has 3 challenges overruled has score 0', () => {
+  const team = getFullTeam();
+  team.setChallengeResult(1, ChallengeResult.OVERRULED);
+  team.setChallengeResult(2, ChallengeResult.OVERRULED);
+  team.setChallengeResult(3, ChallengeResult.OVERRULED);
+
+  expect(team.getScore(1).score).toBe(20);
+  expect(team.getScore(2).score).toBe(10);
+  expect(team.getScore(3).score).toBe(0);
+  expect(team.getScore(q20BIndex).score).toBe(0);
 });

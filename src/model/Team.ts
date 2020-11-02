@@ -1,3 +1,4 @@
+import ChallengeResult from './ChallengeResult';
 import QuestionNumberUtils from './QuestionNumberUtils';
 import QuestionResult from './QuestionResult';
 import Quizzer from './Quizzer';
@@ -12,6 +13,8 @@ class Team {
 
   #quizzers: (Quizzer | null)[];
 
+  #challenges: Map<number, ChallengeResult> = new Map<number, ChallengeResult>();
+
   constructor() {
     this.#quizzers = [];
     this.#quizzers.length = Team.MAX_QUIZZERS;
@@ -20,6 +23,14 @@ class Team {
 
   setOnTime(onTime: boolean): void {
     this.#onTime = onTime;
+  }
+
+  setChallengeResult(atQuestion: number, result?: ChallengeResult): void {
+    if (result) {
+      this.#challenges.set(atQuestion, result);
+    } else {
+      this.#challenges.delete(atQuestion);
+    }
   }
 
   setQuizzer(index: number, quizzer: Quizzer): void {
@@ -36,6 +47,7 @@ class Team {
   getScore(atQuestion: number): TeamScoreOverview {
     const overview: TeamScoreOverview = atQuestion <= 1 ? {
       score: this.#onTime ? 20 : 0,
+      challengesOverruled: 0,
     } : this.getScore(atQuestion - 1);
 
     const quizzerScores = this.getQuizzers().map((quizzer) => quizzer?.getScore(atQuestion));
@@ -69,6 +81,14 @@ class Team {
         overview.score -= 10;
       }
     });
+
+    const challengeResult = this.#challenges.get(atQuestion);
+    if (challengeResult === ChallengeResult.OVERRULED) {
+      overview.challengesOverruled += 1;
+      if (overview.challengesOverruled >= 2) {
+        overview.score -= 10;
+      }
+    }
 
     return overview;
   }
