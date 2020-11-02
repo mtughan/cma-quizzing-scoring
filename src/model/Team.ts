@@ -10,25 +10,27 @@ class Team {
 
   #onTime = false;
 
-  #quizzers: Map<number, Quizzer> = new Map<number, Quizzer>();
+  #quizzers: (Quizzer | null)[];
+
+  constructor() {
+    this.#quizzers = [];
+    this.#quizzers.length = Team.MAX_QUIZZERS;
+    this.#quizzers.fill(null);
+  }
 
   setOnTime(onTime: boolean): void {
     this.#onTime = onTime;
   }
 
   setQuizzer(index: number, quizzer: Quizzer): void {
-    if (index < 0 || index >= Team.MAX_QUIZZERS || Number.isNaN(index)) { // max 5 quizzers
+    if (index < 0 || index >= this.#quizzers.length || Number.isNaN(index)) { // max 5 quizzers
       throw new Error('index must be between 0 and 4!');
     }
-    this.#quizzers.set(index, quizzer);
+    this.#quizzers[index] = quizzer;
   }
 
   getQuizzers(): (Quizzer | null)[] {
-    const quizzers: (Quizzer | null)[] = [];
-    for (let i = 0; i < Team.MAX_QUIZZERS; i += 1) {
-      quizzers.push(this.#quizzers.get(i) ?? null);
-    }
-    return quizzers;
+    return this.#quizzers.slice();
   }
 
   getScore(atQuestion: number): TeamScoreOverview {
