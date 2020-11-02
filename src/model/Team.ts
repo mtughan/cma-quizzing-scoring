@@ -40,10 +40,20 @@ class Team {
     const totalIncorrect = quizzerScores
       .map((score) => score?.incorrect ?? 0)
       .reduce((prev, cur) => prev + cur);
+    const totalQuizzersWithCorrectAnswers = quizzerScores
+      .map((score) => score && score.correct > 0)
+      .filter((hasCorrect) => hasCorrect)
+      .length;
 
     quizzerScores.forEach((score) => {
       if (score?.lastQuestionResult === QuestionResult.CORRECT_ANSWER) {
         overview.score += 20;
+
+        if (score.correct === 1 && totalQuizzersWithCorrectAnswers >= 3) {
+          // if this is the first correct answer for this quizzer and we now have 3 or more quizzers
+          // who have answered correctly, award a 3rd, 4th, or 5th person bonus!
+          overview.score += 10;
+        }
       } else if (score?.lastQuestionResult === QuestionResult.BONUS_CORRECT_ANSWER) {
         overview.score += atQuestion >= q17Index ? 10 : 20;
       } else if (score?.lastQuestionResult === QuestionResult.ERROR

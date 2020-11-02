@@ -276,3 +276,59 @@ test('team that is on time and has 3 incorrect bonus answers after question 17 h
   expect(team.getScore(QuestionNumberUtils.getQuestionIndexForQuestionStr('19B')).score).toBe(20);
   expect(team.getScore(q20BIndex).score).toBe(20);
 });
+
+test('team that is on time and has 3 correct answers from 3 quizzers has score 90', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(1, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[1]?.addQuestionResult(2, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[2]?.addQuestionResult(3, QuestionResult.CORRECT_ANSWER);
+
+  expect(team.getScore(1).score).toBe(40);
+  expect(team.getScore(2).score).toBe(60);
+  expect(team.getScore(3).score).toBe(90);
+  expect(team.getScore(q20BIndex).score).toBe(90);
+});
+
+test('team that is on time and has 4 correct answers from 4 quizzers has score 120', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(1, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[1]?.addQuestionResult(2, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[2]?.addQuestionResult(3, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[3]?.addQuestionResult(4, QuestionResult.CORRECT_ANSWER);
+
+  expect(team.getScore(1).score).toBe(40);
+  expect(team.getScore(2).score).toBe(60);
+  expect(team.getScore(3).score).toBe(90);
+  expect(team.getScore(4).score).toBe(120);
+  expect(team.getScore(q20BIndex).score).toBe(120);
+});
+
+test('team that is on time and has 5 correct answers from 5 quizzers has score 150', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(1, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[1]?.addQuestionResult(2, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[2]?.addQuestionResult(3, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[3]?.addQuestionResult(4, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[4]?.addQuestionResult(5, QuestionResult.CORRECT_ANSWER);
+
+  expect(team.getScore(1).score).toBe(40);
+  expect(team.getScore(2).score).toBe(60);
+  expect(team.getScore(3).score).toBe(90);
+  expect(team.getScore(4).score).toBe(120);
+  expect(team.getScore(5).score).toBe(150);
+  expect(team.getScore(q20BIndex).score).toBe(150);
+});
+
+test('team that is on time and has 2 correct answers from 2 quizzers and 1 incorrect answer from a 3rd quizzer has score 60', () => {
+  const team = getFullTeam();
+  team.getQuizzers()[0]?.addQuestionResult(1, QuestionResult.CORRECT_ANSWER);
+  team.getQuizzers()[1]?.addQuestionResult(2, QuestionResult.ERROR);
+  // this is the 3rd person jumping, but they should not get a 3rd person bonus
+  // because the second jump was answered incorrectly
+  team.getQuizzers()[2]?.addQuestionResult(4, QuestionResult.CORRECT_ANSWER);
+
+  expect(team.getScore(1).score).toBe(40);
+  expect(team.getScore(2).score).toBe(40);
+  expect(team.getScore(4).score).toBe(60);
+  expect(team.getScore(q20BIndex).score).toBe(60);
+});
