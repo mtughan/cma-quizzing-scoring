@@ -15,7 +15,7 @@ class Team {
 
   #challenges: Map<number, ChallengeResult> = new Map<number, ChallengeResult>();
 
-  constructor() {
+  constructor(public readonly name: string) {
     this.#quizzers = [];
     this.#quizzers.length = Team.MAX_QUIZZERS;
     this.#quizzers.fill(null);

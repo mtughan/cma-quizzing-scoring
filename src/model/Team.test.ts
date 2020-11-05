@@ -7,7 +7,7 @@ import Team from './Team';
 const q20BIndex = QuestionNumberUtils.getQuestionIndexForQuestionStr('20B');
 
 function getFullTeam(onTime = true): Team {
-  const team = new Team();
+  const team = new Team('Team 1');
   team.setOnTime(onTime);
   team.setQuizzer(0, new Quizzer('Quizzer 1'));
   team.setQuizzer(1, new Quizzer('Quizzer 2'));
@@ -18,21 +18,27 @@ function getFullTeam(onTime = true): Team {
 }
 
 test('team that is not on time has score 0 to start', () => {
-  const team = new Team();
+  const team = new Team('Team 1');
   team.setOnTime(false);
 
   expect(team.getScore(q20BIndex).score).toBe(0);
 });
 
 test('team that is on time has score 20 to start', () => {
-  const team = new Team();
+  const team = new Team('Team 1');
   team.setOnTime(true);
 
   expect(team.getScore(q20BIndex).score).toBe(20);
 });
 
+test('team has a name', () => {
+  const team = new Team('Team 1');
+
+  expect(team.name).toBe('Team 1');
+});
+
 test('quizzers can be added to a team', () => {
-  const team = new Team();
+  const team = new Team('Team 1');
   team.setQuizzer(0, new Quizzer('Quizzer 1'));
   team.setQuizzer(3, new Quizzer('Quizzer 2'));
 
@@ -46,7 +52,7 @@ test('quizzers can be added to a team', () => {
 });
 
 test('quizzers in invalid seats are rejected', () => {
-  const team = new Team();
+  const team = new Team('Team 1');
   const quizzer = new Quizzer('Quizzer');
 
   expect(() => team.setQuizzer(-1, quizzer)).toThrow();
