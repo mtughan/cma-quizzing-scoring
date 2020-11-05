@@ -58,8 +58,8 @@ class Team {
       .map((score) => score?.fouls ?? 0)
       .reduce((prev, cur) => prev + cur);
     const totalQuizzersWithCorrectAnswers = quizzerScores
-      .map((score) => score && score.correct > 0)
-      .filter((hasCorrect) => hasCorrect)
+      .map((score) => score?.correct ?? 0)
+      .filter((correct) => correct > 0)
       .length;
 
     quizzerScores.forEach((score) => {
