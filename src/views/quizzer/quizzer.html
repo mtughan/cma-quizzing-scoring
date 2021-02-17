@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzer Profile</title>
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="./quizzer.css">
+</head>
+<body>
+    <header class="quizzer">
+        <h1 class="quizzer__name">Michael Tughan</h1>
+        <p class="quizzer__bio">Traveling high and low for answers to all of life's questions!</p>
+        <figure class="quizzer__profile">
+            <img src="https://picsum.photos/id/177/200/300.jpg" alt="profile pic of Mic">
+        </figure>
+    </header>
+    <section>
+        <h2>Quizzer Statistics</h2>
+        <table id="stats">
+            <thead>
+                <tr class="categories">
+                    <th colspan="2">Correct</th>
+                    <th colspan="2">Incorrect</th>
+                    <th colspan="2">Fouls</th>
+                </tr>
+                <tr>
+                    <th class="total">Total</th>
+                    <th class="average">Average</th>
+                    <th class="total">Total</th>
+                    <th class="average">Average</th>
+                    <th class="total">Total</th>
+                    <th class="average">Average</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="total score">12</td>
+                    <td class="average score">6</td>
+                    <td class="total score">6</td>
+                    <td class="average score">3</td>
+                    <td class="total score">4</td>
+                    <td class="average score">2</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Quizzer History</h2>
+        <table id="history">
+            <thead>
+                <tr>
+                    <th class="date">Date<small>(DD-MMM-YYYY)</small></th>
+                    <th class="score correct">Correct</th>
+                    <th class="score incorrect">Incorrect</th>
+                    <th class="score fouls">Fouls</th>
+                    <th class="score overall">score</th>
+                    <th class="question">Last Question</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="date">15-JAN-2021</td>
+                    <td class="score correct">6</td>
+                    <td class="score incorrect">3</td>
+                    <td class="score fouls">2</td>
+                    <td class="score overall">68</td>
+                    <td class="question">example question, Nostrud cupidatat laboris Lorem ullamco fugiat velit ea esse esse commodo id reprehenderit veniam adipisicing?</td>
+                </tr>
+                <tr>
+                    <td class="date">05-JAN-2021</td>
+                    <td class="score correct">6</td>
+                    <td class="score incorrect">3</td>
+                    <td class="score fouls">2</td>
+                    <td class="score overall">68</td>
+                    <td class="question">example question, Nostrud cupidatat laboris Lorem ullamco fugiat velit ea esse esse commodo id reprehenderit veniam adipisicing?</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
