@@ -1,0 +1,49 @@
+:root {
+  --primary: #51548C;
+  --secondary: #F25270;
+  --tertiary-dark: #49A68B;
+  --tertiary-light: #73D99F;
+  --support: #D94848;
+  --alert: var(--support);
+  --white: #FFF;
+  --black: #4b4b4b;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td, tr {
+  border: 1px solid var(--black);
+}
+
+.rank, .score, .name {
+  text-align: center;
+}
+
+th {
+  padding: 0.5em 1em;
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+tbody td {
+  padding: 0.5em;
+}
+tbody tr:nth-child(odd) {
+  background-color: var(--tertiary-light);
+}
+tbody tr:nth-child(even) {
+  background-color: var(--tertiary-dark);
+  color: var(--white);
+}
+
+/*# sourceMappingURL=team.css.map */

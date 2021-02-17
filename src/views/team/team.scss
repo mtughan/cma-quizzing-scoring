@@ -1,0 +1,25 @@
+@import "../styles/main.scss";
+
+.rank, .score , .name{
+    text-align: center;
+}
+
+th {
+    padding: 0.5em 1em;
+    background-color: $primary;
+    color: $white;
+}
+
+tbody {
+    td {
+        padding: 0.5em;
+    }
+
+    tr:nth-child(odd) {
+        background-color: $t-light;
+    }
+    tr:nth-child(even) {
+        background-color: $t-dark;
+        color: $white;
+    }
+}

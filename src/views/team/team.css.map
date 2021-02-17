@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["../styles/_variables.scss","../styles/_global.scss","team.scss"],"names":[],"mappings":"AAAA;EAEI;EACA;EACA;EACA;EACA;EAEA;EACA;EACA;;;ACVJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;AAGJ;EACI;;;ACXJ;EACI;;;AAGJ;EACI;EACA,kBFMO;EELP,OFUK;;;AENL;EACI;;AAGJ;EACI,kBFDG;;AEGP;EACI,kBFLE;EEMF,OFHC","file":"team.css"}

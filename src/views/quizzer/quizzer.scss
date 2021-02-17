@@ -1,0 +1,119 @@
+@import "../styles/main.scss";
+
+.quizzer {
+
+    display: grid;
+    width: max-content;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-areas: 
+    "profile name name"
+    "profile name name"
+    "profile name name"
+    "profile bio bio";
+    align-items: end;
+    
+    &__name {
+        grid-area: name;
+        margin: 0;
+    }
+    &__bio {
+        grid-area: bio;
+    }
+    &__profile {
+        grid-area: profile ;
+        padding: 0;
+        margin: 0 auto;
+        overflow: hidden;
+
+        img {
+            display: block;
+            width: 100%;
+            min-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
+}
+
+.rank, .score, .date {
+    text-align: center;
+}
+
+section {
+    overflow-x: scroll;
+    table {
+        min-width: 900px;
+    }
+}
+
+#stats {
+    thead {
+        color: $white;
+    }
+    
+    .categories {
+
+        th:nth-child(1) {
+            background-color: $t-dark;
+        }
+        th:nth-child(2) {
+            background-color: $secondary;
+        }
+        th:nth-child(3) {
+            background-color: $alert;
+        }
+    }
+
+    th.total {
+        background-color: $black;
+    }
+    th.average {
+        background-color: $primary;
+    }
+}
+
+
+.total, .average {
+    padding: 0.5em 1em;
+}
+
+#history {
+
+    thead {
+
+        background-color: $primary;
+        color: $white;
+
+        .score, .question {
+            padding: 0.5em 1em;
+        }
+
+        .date {
+            padding: 0.5em;
+            min-width: 8em;
+        }
+    }
+
+    tbody {
+
+        tr:nth-child(odd) {
+            background-color: $t-light;
+        }
+        tr:nth-child(even) {
+            background-color: $t-dark;
+            color: $white;
+        }
+    } 
+}
+
+.date small {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+
+.question {
+    padding: 0.5em 1em;
+    text-align: left;
+}
