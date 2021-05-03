@@ -1,0 +1,21 @@
+:root {
+
+    --primary: #51548C;
+    --secondary: #F25270;
+    --tertiary-dark: #49A68B;
+    --tertiary-light: #73D99F;
+    --support: #D94848;
+
+    --alert: var(--support);
+    --white: #FFF;
+    --black: #4b4b4b;
+
+}
+
+$primary : var(--primary);
+$secondary : var(--secondary);
+$t-dark : var(--tertiary-dark);
+$t-light : var(--tertiary-light);
+$alert : var(--alert);
+$white : var(--white);
+$black : var(--black);

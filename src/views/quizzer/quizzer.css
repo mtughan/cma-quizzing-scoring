@@ -1,0 +1,124 @@
+:root {
+  --primary: #51548C;
+  --secondary: #F25270;
+  --tertiary-dark: #49A68B;
+  --tertiary-light: #73D99F;
+  --support: #D94848;
+  --alert: var(--support);
+  --white: #FFF;
+  --black: #4b4b4b;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td, tr {
+  border: 1px solid var(--black);
+}
+
+thead tr:first-child th:first-child {
+  border-top-left-radius: 0.5em;
+}
+
+.quizzer {
+  display: grid;
+  width: max-content;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas: "profile name name" "profile name name" "profile name name" "profile bio bio";
+  align-items: end;
+}
+.quizzer__name {
+  grid-area: name;
+  margin: 0;
+}
+.quizzer__bio {
+  grid-area: bio;
+}
+.quizzer__profile {
+  grid-area: profile;
+  padding: 0;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.quizzer__profile img {
+  display: block;
+  width: 100%;
+  min-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.rank, .score, .date {
+  text-align: center;
+}
+
+section {
+  overflow-x: scroll;
+}
+section table {
+  min-width: 900px;
+}
+
+#stats thead {
+  color: var(--white);
+}
+#stats .categories th:nth-child(1) {
+  background-color: var(--tertiary-dark);
+}
+#stats .categories th:nth-child(2) {
+  background-color: var(--secondary);
+}
+#stats .categories th:nth-child(3) {
+  background-color: var(--alert);
+}
+#stats th.total {
+  background-color: var(--black);
+}
+#stats th.average {
+  background-color: var(--primary);
+}
+
+.total, .average {
+  padding: 0.5em 1em;
+}
+
+#history thead {
+  background-color: var(--primary);
+  color: var(--white);
+}
+#history thead .score, #history thead .question {
+  padding: 0.5em 1em;
+}
+#history thead .date {
+  padding: 0.5em;
+  min-width: 8em;
+}
+#history tbody tr:nth-child(odd) {
+  background-color: var(--tertiary-light);
+}
+#history tbody tr:nth-child(even) {
+  background-color: var(--tertiary-dark);
+  color: var(--white);
+}
+
+.date small {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.question {
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+/*# sourceMappingURL=quizzer.css.map */
